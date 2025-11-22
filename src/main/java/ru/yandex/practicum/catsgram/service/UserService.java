@@ -39,6 +39,13 @@ public class UserService {
         return users.values();
     }
 
+    public Optional<User> findUserById(long id) {
+        return users.values()
+                .stream()
+                .filter(user -> user.getId() == id)
+                .findFirst();
+    }
+
     public User create(User user) {
         // проверяем выполнение необходимых условий
         if (user.getEmail() == null || user.getEmail().isBlank()) {
