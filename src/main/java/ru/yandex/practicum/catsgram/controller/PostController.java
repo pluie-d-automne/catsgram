@@ -18,11 +18,15 @@ public class PostController {
     }
 
     @GetMapping
-    public Collection<Post> findAll() {
-        return postService.findAll();
+    public Collection<Post> findAll(
+            @RequestParam(defaultValue = "desc") String sort,
+            @RequestParam(defaultValue = "0") String from,
+            @RequestParam(defaultValue = "10") String size
+    ) {
+        return postService.findAll(Integer.parseInt(size), sort, Integer.parseInt(from));
     }
 
-    @GetMapping("/{postid}")
+    @GetMapping("/{postId}")
     public Optional<Post> findPostById(@PathVariable long postId) {
         return postService.findPostById(postId);
     }
