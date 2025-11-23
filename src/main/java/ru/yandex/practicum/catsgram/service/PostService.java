@@ -27,6 +27,13 @@ public class PostService {
         return posts.values();
     }
 
+    public Optional<Post> findPostById(long postId) {
+        return posts.values()
+                .stream()
+                .filter(post -> post.getId() == postId)
+                .findFirst();
+    }
+
     public Post create(Post post) {
         if (post.getDescription() == null || post.getDescription().isBlank()) {
             throw new ConditionsNotMetException("Описание не может быть пустым");
